@@ -45,9 +45,9 @@ def check_sru_requirement(abort=False):
             subprocess.check_output('pip freeze | findstr pynvrtc',
                                     shell=True)
         else:  # Unix-like systems
-            subprocess.check_output('pip freeze | grep -w cupy', shell=True)
-            subprocess.check_output('pip freeze | grep -w pynvrtc',
-                                    shell=True)
+            # subprocess.check_output('pip freeze | grep -w cupy', shell=True)
+            # subprocess.check_output('pip freeze | grep -w pynvrtc',
+                                    # shell=True)
     except subprocess.CalledProcessError:
         if not abort:
             return False
