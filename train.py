@@ -17,11 +17,11 @@ import onmt.modules
 from onmt.Utils import aeq, use_gpu
 import opts
 
-from comet_ml import Experiment
-comet = False
+comet = os.environ.get("COMET_KEY", "")
 
 if comet:
-    experiment_comet = Experiment(api_key=os.environ.get("COMET_KEY"))
+    from comet_ml import Experiment
+    experiment_comet = Experiment(api_key=comet)
 
 
 parser = argparse.ArgumentParser(
@@ -168,15 +168,13 @@ def train_model(model, train_data, valid_data, fields, optim):
         train_stats = trainer.train(epoch, report_func)
         print('Train perplexity: %g' % train_stats.ppl())
         print('Train accuracy: %g' % train_stats.accuracy())
-        if comet:
-            experiment_comet.log_metric("Train acc: {}".format(train_stats.accuracy()))
 
         # 2. Validate on the validation set.
         valid_stats = trainer.validate()
         print('Validation perplexity: %g' % valid_stats.ppl())
         print('Validation accuracy: %g' % valid_stats.accuracy())
         if comet:
-            experiment_comet.log-metric("Test acc: {}".format(valid_stats.accuracy()))
+            experiment_comet.log-metric("Test acc: ", valid_stats.accuracy())
 
         # 3. Log to remote server.
         if opt.exp_host:

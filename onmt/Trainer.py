@@ -12,12 +12,18 @@ users of this library) for the strategy things we do.
 import time
 import sys
 import math
+import os
 import torch
 import torch.nn as nn
 
 import onmt
 import onmt.modules
 
+
+comet = os.environ.get("COMET_KEY", "")
+if comet:
+    from comet_ml import Experiment
+    experiment_comet = Experiment(api_key=comet)
 
 class Statistics(object):
     """
@@ -54,6 +60,10 @@ class Statistics(object):
                self.n_src_words / (t + 1e-5),
                self.n_words / (t + 1e-5),
                time.time() - start))
+        if comet:
+            experiment_comet.log_step(time.time() - start)
+            experiment_comet.log_metric("Train accuracy: ", self.accuracy())
+            experiment_comet.log_metric("Train ppl: ", self.ppl())
         sys.stdout.flush()
 
     def log(self, prefix, experiment, lr):
