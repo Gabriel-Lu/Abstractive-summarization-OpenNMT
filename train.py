@@ -122,7 +122,8 @@ def make_valid_data_iter(valid_data, opt):
     return onmt.IO.OrderedIterator(
                 dataset=valid_data, batch_size=opt.batch_size,
                 device=opt.gpuid[0] if opt.gpuid else -1,
-                train=False, sort=True)
+                train=False, sort=True,
+                )
 
 
 def make_loss_compute(model, tgt_vocab, dataset, opt):
@@ -131,9 +132,11 @@ def make_loss_compute(model, tgt_vocab, dataset, opt):
     compute loss in train/validate process. You can implement your
     own *LossCompute class, by subclassing LossComputeBase.
     """
-    if opt.copy_attn:
+    if opt.copy_attn or opt.pointer_gen:
         compute = onmt.modules.CopyGeneratorLossCompute(
-            model.generator, tgt_vocab, dataset, opt.copy_attn_force)
+            model.generator, tgt_vocab, dataset, opt.copy_attn_force,
+            opt.pointer_gen,
+        )
     else:
         compute = onmt.Loss.NMTLossCompute(model.generator, tgt_vocab)
 
