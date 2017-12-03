@@ -1,5 +1,5 @@
 import argparse
-from onmt.modules.SRU import CheckSRU
+# from onmt.modules.SRU import CheckSRU
 
 
 def model_opts(parser):
@@ -63,10 +63,10 @@ def model_opts(parser):
                         additional input (via concatenation with the word
                         embeddings) to the decoder.""")
 
-    parser.add_argument('-rnn_type', type=str, default='LSTM',
-                        choices=['LSTM', 'GRU', 'SRU'],
-                        action=CheckSRU,
-                        help="""The gate type to use in the RNNs""")
+    # parser.add_argument('-rnn_type', type=str, default='LSTM',
+    #                     choices=['LSTM', 'GRU', 'SRU'],
+    #                     action=CheckSRU,
+    #                    help="""The gate type to use in the RNNs""")
     # parser.add_argument('-residual',   action="store_true",
     #                     help="Add residual connections between RNN layers.")
 
