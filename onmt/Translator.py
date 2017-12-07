@@ -150,13 +150,9 @@ class Translator(object):
             inp = inp.unsqueeze(2)
 
             # Run one step.
-<<<<<<< HEAD
             decOut, decStates, attn, decRNNOut, srcEmb = \
-                self.model.decoder(inp, context, decStates)
-=======
-            decOut, decStates, attn = self.model.decoder(
-                inp, context, decStates, context_lengths=context_lengths)
->>>>>>> master
+                self.model.decoder(inp, context, decStates,
+                                   context_lengths=context_lengths)
             decOut = decOut.squeeze(0)
             # decOut: beam x rnn_size
             decRNNOut = decRNNOut.squeeze(0)
