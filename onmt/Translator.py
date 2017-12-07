@@ -155,8 +155,8 @@ class Translator(object):
                                    context_lengths=context_lengths)
             decOut = decOut.squeeze(0)
             # decOut: beam x rnn_size
-            decRNNOut = decRNNOut.squeeze(0)
-            srcEmb = srcEmb.squeeze(0)
+            if decRNNOut is not None:
+                decRNNOut = decRNNOut.squeeze(0)
 
             # (b) Compute a vector of batch*beam word scores.
             if not self.copy_attn and not self.pointer_gen:
