@@ -41,14 +41,16 @@ python preprocess.py -train_src data/src-train.txt -train_tgt data/tgt-train.txt
 ```
 
 The data can be either Gigaword or the CNN/Daily Mail dataset.
-* Mention details of how those were preprocessed and how to retrieve them *
 
-The data consists of parallel source (`src`) and target (`tgt`) data containing one sentence per line with tokens separated by a space:
+The data consists of parallel source (`src`) and target (`tgt`) data containing one example per line with tokens separated by a space:
 
 * `src-train.txt`
 * `tgt-train.txt`
 * `src-val.txt`
 * `tgt-val.txt`
+
+For Gigaword, download the data from : https://github.com/harvardnlp/sent-summary. Then, extract it (```tar -xzf summary.tar.gz ```)
+For CNN/Daily Mail, we assume access to such files. Otherwise, these can be built from https://github.com/OpenNMT/cnn-dailymail.
 
 Validation files are required and used to evaluate the convergence of the training.
 
@@ -122,4 +124,4 @@ Table to be included
 
 ## Pretrained models
 
-Pretrained modells to be included
+Pretrained models to be included
