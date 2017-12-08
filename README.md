@@ -12,7 +12,7 @@ Table of Contents
 =================
 
   * [Requirements](#requirements)
-  * [Implemented models](#implemented models)
+  * [Implemented models](#implemented-models)
   * [Quickstart](#quickstart)
   * [Results](#results)
   * [Pretrained models](#models)
