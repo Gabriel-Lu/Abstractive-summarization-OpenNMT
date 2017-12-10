@@ -69,7 +69,9 @@ def main():
         shuffle=False)
 
     counter = count(1)
-    for batch in test_data:
+    for i, batch in enumerate(test_data):
+        print(f"{i}/{len(test_data)}")
+
         pred_batch, gold_batch, pred_scores, gold_scores, attn, src \
             = translator.translate(batch, data)
         pred_score_total += sum(score[0] for score in pred_scores)
