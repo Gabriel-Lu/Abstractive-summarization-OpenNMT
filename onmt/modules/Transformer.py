@@ -275,7 +275,8 @@ class TransformerDecoder(nn.Module):
         # Update the state.
         state.update_state(input)
 
-        return outputs, state, attns
+        # Pointer-Gen pass-through
+        return outputs, state, attns, None, emb
 
     def init_decoder_state(self, src, context, enc_hidden):
         return TransformerDecoderState(src)

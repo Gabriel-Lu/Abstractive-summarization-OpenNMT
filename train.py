@@ -1,5 +1,6 @@
 #!/usr/bin/env python
 
+
 from __future__ import division
 
 import os
@@ -15,6 +16,13 @@ import onmt.ModelConstructor
 import onmt.modules
 from onmt.Utils import aeq, use_gpu
 import opts
+
+comet = os.environ.get("COMET_KEY", "")
+
+if comet:
+    from comet_ml import Experiment
+    experiment_comet = Experiment(api_key=comet)
+
 
 parser = argparse.ArgumentParser(
     description='train.py',
@@ -147,6 +155,7 @@ def train_model(model, train_data, valid_data, fields, optim):
                                    train_data, opt)
     valid_loss = make_loss_compute(model, fields["tgt"].vocab,
                                    valid_data, opt)
+    
 
     trunc_size = opt.truncated_decoder  # Badly named...
     shard_size = opt.max_generator_batches
@@ -167,6 +176,8 @@ def train_model(model, train_data, valid_data, fields, optim):
         valid_stats = trainer.validate()
         print('Validation perplexity: %g' % valid_stats.ppl())
         print('Validation accuracy: %g' % valid_stats.accuracy())
+        if comet:
+            experiment_comet.log-metric("Test acc: ", valid_stats.accuracy())
 
         # 3. Log to remote server.
         if opt.exp_host:
@@ -253,6 +264,9 @@ def build_optim(model, checkpoint):
             opt.optim, opt.learning_rate, opt.max_grad_norm,
             lr_decay=opt.learning_rate_decay,
             start_decay_at=opt.start_decay_at,
+            beta1=opt.adam_beta1,
+            beta2=opt.adam_beta2,
+            adagrad_accum=opt.adagrad_accumulator_init,
             opt=opt
         )
 
