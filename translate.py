@@ -66,7 +66,7 @@ def main():
 
     counter = count(1)
     for i, batch in enumerate(test_data):
-        print(f"{i}/{len(test_data.batches)}")
+        print(f"{opt.src}: {i}/{len(test_data.batches)}")
 
         pred_batch, gold_batch, pred_scores, gold_scores, attn, src \
             = translator.translate(batch, data)
