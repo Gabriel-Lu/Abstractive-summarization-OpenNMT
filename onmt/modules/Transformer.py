@@ -201,7 +201,7 @@ class TransformerDecoder(nn.Module):
                 hidden_size, attn_type=attn_type)
             self._copy = True
 
-    def forward(self, input, context, state):
+    def forward(self, input, context, state, context_lengths=None):
         """
         Forward through the TransformerDecoder.
         Args:
