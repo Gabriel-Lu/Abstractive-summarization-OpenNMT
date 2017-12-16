@@ -299,6 +299,16 @@ def translate_opts(parser):
     parser.add_argument('-beta', type=float, default=-0.,
                         help="""Coverage penalty parameter""")
 
+    # Truncation options
+    parser.add_argument('-src_seq_length', type=int, default=50,
+                        help="Maximum source sequence length")
+    parser.add_argument('-src_seq_length_trunc', type=int, default=0,
+                        help="Truncate source sequence length.")
+    parser.add_argument('-tgt_seq_length', type=int, default=50,
+                        help="Maximum target sequence length to keep.")
+    parser.add_argument('-tgt_seq_length_trunc', type=int, default=0,
+                        help="Truncate target sequence length.")
+
 
 def add_md_help_argument(parser):
     parser.add_argument('-md', action=MarkdownHelpAction,
