@@ -173,4 +173,14 @@ Detailed settings:
 
 ## Pretrained models
 
-Pretrained models to be included
+### Gigaword
+
+* [Attention LSTM](https://drive.google.com/file/d/1PFrcrn_9HN-Ww0nFaZL3WDzIyhZ73P6w/view?usp=sharing)
+* [Pointer-Generator](https://drive.google.com/file/d/1Wlmnpdx7dmoG49YpCfODtAt5fgm7K_dg/view?usp=sharing)
+* [Transformer](https://drive.google.com/file/d/1NHobKlg3JlPpltg9KJfcPliwOtCgiwRc/view?usp=sharing)
+
+### CNN/Daily Mail
+
+* [Attention LSTM](https://drive.google.com/file/d/1PHWH20LsoKyUiPq4xnWu7SF1o72Frouu/view?usp=sharing)
+* [Pointer-Generator](https://drive.google.com/file/d/1pS5G9_Usb_GueKMQYyAUH0j0Pk_hAQHZ/view?usp=sharing)
+* [Transformer](https://drive.google.com/file/d/18C6RwEm87KSNkhvu58caF41-Kg-dtAMJ/view?usp=sharing)
