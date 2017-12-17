@@ -152,7 +152,7 @@ The Transformer network also has the following additional settings during traini
 |---|---|---|---|
 | Attention LSTM | 30.25 | 12.41 | 22.93 |
 | Pointer-Generator | **34.00**  | **14.70**  | **36.57** |
-| Transformer | 21.19  | 4.15  | 36.57 |
+| Transformer | 23.90  | 5.85  | 17.36 |
 | lead-3 baseline  | 40.34 | 17.70 | 36.57  |
 
 Detailed settings:
