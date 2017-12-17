@@ -15,7 +15,7 @@ Table of Contents
   * [Implemented models](#implemented-models)
   * [Quickstart](#quickstart)
   * [Results](#results)
-  * [Pretrained models](#models)
+  * [Pretrained models](#pretrained-models)
 
 ## Requirements
 
@@ -40,7 +40,7 @@ The following models are implemented:
 python preprocess.py -train_src data/src-train.txt -train_tgt data/tgt-train.txt -valid_src data/src-val.txt -valid_tgt data/tgt-val.txt -save_data data/demo -share_vocab -dynamic_dict -src_vocab_size 50000
 ```
 
-The data can be either Gigaword or the CNN/Daily Mail dataset.
+The data can be either Gigaword or the CNN/Daily Mail dataset. For CNN/daily mail, it is also recommended to truncate inputs and outputs: -src_seq_length_trunc 400 -tgt_seq_length_trunc 100
 
 The data consists of parallel source (`src`) and target (`tgt`) data containing one example per line with tokens separated by a space:
 
@@ -74,11 +74,11 @@ python train.py -data data/demo -save_model demo_model -share_embeddings
 The main relevant parameters to be changed for summarization are:
 
 * pointer\_gen to enable Pointer Generator
-* to enable Transformer networks
+* -encoder_type transformer -decoder_type transformer to enable Transformer networks
 * word\_vec\_size (128 has given good results)
 * rnn\_size (256 or 512 work well in practice)
 * encoder\_type (brnn works best on most models)
-* layers (1 or 2)
+* layers (1 or 2, up to 6 on transformer)
 * gpuid (0 for the first gpu, -1 if on cpu)
 
 The parameters for our trained models are described below
@@ -86,7 +86,7 @@ The parameters for our trained models are described below
 ### Step 3: Summarize
 
 ```bash
-python translate.py -model demo-model_epochX_PPL.pt -src data/src-test.txt -o output_pred.txt -replace_unk -beam_size 10
+python translate.py -model demo-model_epochX_PPL.pt -src data/src-test.txt -o output_pred.txt -beam_size 10
 -dynamic_dict -share_vocab
 ```
 
@@ -113,14 +113,27 @@ To run evaluation, simply run:
 ```bash
 files2rouge summaries.txt references.txt
 ```
-## Pretrained embeddings (e.g. GloVe)
-
-Go to tutorial: [How to use GloVe pre-trained embeddings in OpenNMT-py](http://forum.opennmt.net/t/how-to-use-glove-pre-trained-embeddings-in-opennmt-py/1011)
+In the case of CNN, evaluation should be done with beginning and end of sentences tokens stripped.
 
 
 ## Results
 
-Table to be included
+#### Gigaword:
+|   | Rouge-1  | Rouge-2   | Rouge-L   |
+|---|---|---|---|
+| Attention LSTM | **35.59** | **17.63** | **33.46** |
+| Pointer-Generator | 33.44  | 16.55  | 31.43 |
+| Transformer | 35.10  | 17.01  | 33.09 |
+| lead-8w baseline  | 21.31  | 7.34 | 19.95  |
+
+#### CNN/Daily Mail
+
+|   | Rouge-1  | Rouge-2   | Rouge-L   |
+|---|---|---|---|
+| Attention LSTM | 30.25 | 12.41 | 22.93 |
+| Pointer-Generator | **34.00**  | **14.70**  | **36.57** |
+| Transformer | 21.19  | 4.15  | 36.57 |
+| lead-3 baseline  | 40.34 | 17.70 | 36.57  |
 
 ## Pretrained models
 
