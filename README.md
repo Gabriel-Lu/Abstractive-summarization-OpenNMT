@@ -143,6 +143,9 @@ Detailed settings:
 | Max grad norm | 2 | 2 | n.a |
 | Batch size | 64 | 32 | 32 |
 
+The Transformer network also has the following additional settings during training:
+> `param_init=0 position_encoding warmup_steps=4000 decay_method=noam`
+
 #### CNN/Daily Mail
 
 |   | Rouge-1  | Rouge-2   | Rouge-L   |
@@ -169,6 +172,8 @@ Detailed settings:
 | Max grad norm | 2 | 2 | n.a |
 | Batch size | 32 | 32 | 64 |
 
+The Transformer network also has the following additional settings during training:
+> `param_init=0 position_encoding warmup_steps=4000 decay_method=noam`
 
 
 ## Pretrained models
