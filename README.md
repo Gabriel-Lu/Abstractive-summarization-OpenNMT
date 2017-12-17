@@ -126,6 +126,23 @@ In the case of CNN, evaluation should be done with beginning and end of sentence
 | Transformer | 35.10  | 17.01  | 33.09 |
 | lead-8w baseline  | 21.31  | 7.34 | 19.95  |
 
+Detailed settings:
+
+|   | Attention | Pointer-Generator | Transformer |
+|---|---|---|---|
+| Vocabulary size| 50k | 50k | 50k |
+| Word embedding size | 128  | 128 | 512 |
+| Attention | MLP  | Copy  | Multi-head |
+| Encoder layers | 1 | 1 | 4 |
+| Decoder layers | 1 | 1 | 4 |
+| Enc/Dec type | BiLSTM | BiLSTM | Transformer |
+| Enc units | 512 | 256 | 512 |
+| Optimizer | Sgd | Sgd | Adam |
+| Learning rate | 1 | 1 | 1 |
+| Dropout | 0.3 | 0.3 | 0.2 |
+| Max grad norm | 2 | 2 | n.a |
+| Batch size | 64 | 32 | 32 |
+
 #### CNN/Daily Mail
 
 |   | Rouge-1  | Rouge-2   | Rouge-L   |
@@ -134,6 +151,25 @@ In the case of CNN, evaluation should be done with beginning and end of sentence
 | Pointer-Generator | **34.00**  | **14.70**  | **36.57** |
 | Transformer | 21.19  | 4.15  | 36.57 |
 | lead-3 baseline  | 40.34 | 17.70 | 36.57  |
+
+Detailed settings:
+
+|   | Attention | Pointer-Generator | Transformer |
+|---|---|---|---|
+| Vocabulary size| 50k | 50k | 50k |
+| Word embedding size | 128  | 128 | 256 |
+| Attention | MLP  | Copy  | Multi-head |
+| Encoder layers | 1 | 1 | 4 |
+| Decoder layers | 1 | 1 | 4 |
+| Enc/Dec type | BiLSTM | BiLSTM | Transformer |
+| Enc units | 256 | 256 | 256 |
+| Optimizer | Sgd | Sgd | Adam |
+| Learning rate | 1 | 1 | 1 |
+| Dropout | 0.3 | 0.3 | 0.2 |
+| Max grad norm | 2 | 2 | n.a |
+| Batch size | 32 | 32 | 64 |
+
+
 
 ## Pretrained models
 
