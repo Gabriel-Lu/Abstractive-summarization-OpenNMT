@@ -1,11 +1,10 @@
 # Abstractive summarization with OpenNMT-py
 
-This is a [Pytorch](https://github.com/pytorch/pytorch)
-implementation of Abstractive summarization methods on top
-of [OpenNMT](https://github.com/OpenNMT/OpenNMT). It features vanilla attention seq-to-seq LSTMs,
+这是一个用 [Pytorch](https://github.com/pytorch/pytorch)
+实现的抽取概要方法，使用库 [OpenNMT](https://github.com/OpenNMT/OpenNMT). It features vanilla attention seq-to-seq LSTMs,
 [pointer-generator networks (See 2017)](https://arxiv.org/abs/1704.04368) ("copy attention"),
 as well as [transformer networks  (Vaswani 2017)](https://arxiv.org/pdf/1706.03762.pdf)  ("attention is all you need")
-as well as instructions to run the networks on both the Gigaword and the CNN/Dayly Mail datasets.
+和指令来  run the networks on both the Gigaword and the CNN/Dayly Mail 数据集上.
 
 
 Table of Contents
@@ -20,7 +19,7 @@ Table of Contents
 ## Requirements
 
 ```bash
-pip install -r requirements.txt
+pip3 install -r requirements.txt
 ```
 
 ## Implemented models
@@ -34,13 +33,13 @@ The following models are implemented:
 
 ## Quickstart
 
-### Step 1: Preprocess the data
+### Step 1: 预处理数据
 
 ```bash
-python preprocess.py -train_src data/src-train.txt -train_tgt data/tgt-train.txt -valid_src data/src-val.txt -valid_tgt data/tgt-val.txt -save_data data/demo -share_vocab -dynamic_dict -src_vocab_size 50000
+python3 preprocess.py -train_src data/src-train.txt -train_tgt data/tgt-train.txt -valid_src data/src-val.txt -valid_tgt data/tgt-val.txt -save_data data/demo -share_vocab -dynamic_dict -src_vocab_size 50000
 ```
 
-The data can be either Gigaword or the CNN/Daily Mail dataset. For CNN/daily mail, it is also recommended to truncate inputs and outputs: -src_seq_length_trunc 400 -tgt_seq_length_trunc 100
+数据集： Gigaword 或者 the CNN/Daily Mail 都可以. 对于 CNN/daily mail, 最好使用这个来 truncate inputs and outputs: -src_seq_length_trunc 400 -tgt_seq_length_trunc 100
 
 The data consists of parallel source (`src`) and target (`tgt`) data containing one example per line with tokens separated by a space:
 
@@ -52,9 +51,9 @@ The data consists of parallel source (`src`) and target (`tgt`) data containing 
 For Gigaword, download the data from : https://github.com/harvardnlp/sent-summary. Then, extract it (```tar -xzf summary.tar.gz ```)
 For CNN/Daily Mail, we assume access to such files. Otherwise, these can be built from https://github.com/OpenNMT/cnn-dailymail.
 
-Validation files are required and used to evaluate the convergence of the training.
+我们需要Validation files 来评估训练的收敛性
 
-After running the preprocessing, the following files are generated:
+预处理结束后，会生成一下文件：
 
 * `demo.train.pt`: serialized PyTorch file containing training data
 * `demo.valid.pt`: serialized PyTorch file containing validation data
@@ -63,12 +62,12 @@ After running the preprocessing, the following files are generated:
 
 Internally the system never touches the words themselves, but uses these indices.
 
-### Step 2: Train the model
+### Step 2: 训练模型
 
-The basic command would be:
+基础命令行：
 
 ```bash
-python train.py -data data/demo -save_model demo_model -share_embeddings
+python3 train.py -data data/demo -save_model demo_model -share_embeddings
 ```
 
 The main relevant parameters to be changed for summarization are:
